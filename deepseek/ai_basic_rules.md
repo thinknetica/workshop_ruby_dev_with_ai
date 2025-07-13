@@ -229,3 +229,6 @@ by [Thinknetika](https://thinknetica.com/) and [Eugene Leontev](https://madmatve
 > Пример идеального промпта:  
 > `// @app/services/payment_service.rb:32 - Оптимизируй метод process! с обработкой ошибок и проверкой N+1 в связанных моделях`  
 > Такой запрос дает точное местоположение, конкретную задачу и учитывает ключевые аспекты (ошибки, производительность).
+
+---
+![Thinknetika Logo](thinknetika_logo.png)
