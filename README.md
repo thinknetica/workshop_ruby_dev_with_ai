@@ -1,24 +1,81 @@
-# README
+# Чат для владельцев общих приватных репозиториев GitHub
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Веб-приложение для обмена сообщениями между пользователями GitHub, у которых есть хотя бы один общий приватный репозиторий. Поддерживаются личные и групповые чаты, формируемые автоматически на основе состава приватных репозиториев.
 
-Things you may want to cover:
+## Технологии
+- Ruby on Rails (API + Web)
+- PostgreSQL
+- Hotwire (Turbo, Stimulus)
+- Tailwind CSS
+- OmniAuth GitHub OAuth
 
-* Ruby version
+## Установка и запуск
+1. Установите Ruby 3.x и PostgreSQL.
+2. Клонируйте репозиторий:
+   ```sh
+   git clone <repo_url>
+   cd rules
+   ```
+3. Установите зависимости:
+   ```sh
+   bundle install
+   ```
+4. Настройте переменные окружения для GitHub OAuth (см. ниже).
+5. Создайте и инициализируйте базу данных:
+   ```sh
+   bin/rails db:setup
+   ```
+6. Запустите сервер:
+   ```sh
+   bin/rails server
+   ```
 
-* System dependencies
+## Настройка GitHub OAuth
+- Зарегистрируйте приложение на GitHub: https://github.com/settings/developers
+- Укажите callback URL: `http://localhost:3000/auth/github/callback`
+- Добавьте переменные окружения:
+  - `GITHUB_CLIENT_ID`
+  - `GITHUB_CLIENT_SECRET`
 
-* Configuration
+## Тестирование
+- Для запуска тестов используйте:
+  ```sh
+  bin/rails test
+  # или для RSpec (если настроен)
+  bundle exec rspec
+  ```
 
-* Database creation
+## Основные функции
+- Вход через GitHub OAuth (только с правами на приватные репозитории)
+- Автоматическое создание чатов по общим приватным репозиториям
+- Личные и групповые чаты (до 50 участников)
+- История сообщений, индикаторы непрочитанных, онлайн-статус
+- Профили пользователей
+- Mobile first, тёмная тема, поддержка RU/EN
 
-* Database initialization
+## Структура БД (основные таблицы)
+- users (github_id, username, email, avatar_url, ...)
+- repositories (github_repo_id, name, private)
+- user_repositories (user_id, repository_id)
+- chats (chat_type, repository_id)
+- chat_users (chat_id, user_id, joined_at, left_at)
+- messages (chat_id, user_id, content)
+- unread_messages (user_id, chat_id, last_read_message_id)
 
-* How to run the test suite
+Подробнее — см. [spec.md](spec.md)
 
-* Services (job queues, cache servers, search engines, etc.)
+## API (REST)
+- `/auth/github` — вход через GitHub
+- `/api/users` — список пользователей
+- `/api/chats` — список чатов
+- `/api/chats/:id/messages` — сообщения чата
+- `/api/chats/:id/leave` — выйти из группового чата
 
-* Deployment instructions
+## Безопасность
+- Только OAuth GitHub
+- Защита от XSS/CSRF
+- Rails best practices
 
-* ...
+---
+
+Для подробной спецификации и примеров интерфейса см. [spec.md](spec.md)
