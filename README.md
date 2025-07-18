@@ -1,3 +1,5 @@
+![Thinknetica](public/thinknetika_logo.png)
+
 # Чат для владельцев общих приватных репозиториев GitHub
 
 Веб-приложение для обмена сообщениями между пользователями GitHub, у которых есть хотя бы один общий приватный репозиторий. Поддерживаются личные и групповые чаты, формируемые автоматически на основе состава приватных репозиториев.
@@ -13,8 +15,8 @@
 1. Установите Ruby 3.x и PostgreSQL.
 2. Клонируйте репозиторий:
    ```sh
-   git clone <repo_url>
-   cd rules
+   git clone https://github.com/thinknetica/workshop_ruby_dev_with_ai.git
+   cd workshop_ruby_dev_with_ai
    ```
 3. Установите зависимости:
    ```sh
