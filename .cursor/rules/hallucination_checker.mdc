@@ -1,6 +1,6 @@
 ---
-alwaysApply: true
-description: Rule for detecting potential hallucinations in AI-generated code and text by cross-referencing with project specifications and prompt history
+description: Rule that detects potential hallucinations in AI-generated code and text by cross-referencing with project specifications and prompt history
+agentRequested: true
 ---
 
 # AI Hallucination Detection Rule
