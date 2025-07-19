@@ -1,0 +1,161 @@
+---
+alwaysApply: true
+description: Rule for detecting potential hallucinations in AI-generated code and text by cross-referencing with project specifications and prompt history
+---
+
+# AI Hallucination Detection Rule
+
+This rule helps detect potential hallucinations in AI-generated code and text by cross-referencing with project specifications, prompt history, and existing codebase patterns.
+
+## Core Detection Principles
+
+### 1. Cross-Reference with Project Specifications
+Always verify AI-generated content against:
+- [spec.md](mdc:spec.md) - Project specifications and requirements
+- [README.md](mdc:README.md) - Project overview and setup instructions
+- [prompt_logs/brainstorm.md](mdc:prompt_logs/brainstorm.md) - Detailed development history
+- [prompt_logs/webinar_2_logs.md](mdc:prompt_logs/webinar_2_logs.md) - Implementation logs
+
+### 2. Technology Stack Validation
+Ensure generated code aligns with the project's technology stack:
+- **Backend**: Ruby on Rails (API + Web)
+- **Frontend**: Hotwire (Turbo, Stimulus), Tailwind CSS
+- **Database**: PostgreSQL
+- **Authentication**: OmniAuth GitHub OAuth
+- **No external integrations** except GitHub API
+
+### 3. Architecture Consistency Checks
+Verify that generated code follows the established patterns:
+- **Database Schema**: Check against tables defined in spec.md (users, repositories, user_repositories, chats, chat_users, messages, unread_messages)
+- **API Structure**: Ensure REST endpoints match spec.md definitions
+- **Model Relationships**: Validate ActiveRecord associations
+- **Controller Actions**: Confirm they align with API specifications
+
+## Specific Hallucination Detection Patterns
+
+### Database and Model Hallucinations
+**Red Flags:**
+- Tables not mentioned in [spec.md](mdc:spec.md) database schema
+- Fields that don't exist in the specification
+- Incorrect data types or constraints
+- Missing or incorrect foreign key relationships
+
+**Verification Steps:**
+1. Cross-reference with database schema in spec.md
+2. Check existing migrations in `db/` directory
+3. Verify model associations match user_repositories, chat_users relationships
+
+### API Endpoint Hallucinations
+**Red Flags:**
+- Endpoints not defined in spec.md API section
+- Incorrect HTTP methods or response formats
+- Missing required parameters or authentication
+- Inconsistent JSON response structures
+
+**Verification Steps:**
+1. Check spec.md API schemas section
+2. Verify authentication requirements (GitHub OAuth only)
+3. Confirm response format matches examples
+
+### Feature Hallucinations
+**Red Flags:**
+- Features not mentioned in brainstorm.md development history
+- Functionality explicitly excluded in specifications
+- Integration with external services (only GitHub allowed)
+- Real-time features when not specified
+
+**Verification Steps:**
+1. Review prompt_logs/brainstorm.md for feature discussions
+2. Check spec.md functional requirements
+3. Verify against "Нефункциональные требования" section
+
+### Technology Stack Hallucinations
+**Red Flags:**
+- Libraries or frameworks not in Gemfile
+- Frontend frameworks other than Hotwire/Turbo/Stimulus
+- Database systems other than PostgreSQL
+- Authentication methods other than GitHub OAuth
+
+**Verification Steps:**
+1. Check [Gemfile](mdc:Gemfile) for dependencies
+2. Verify [config/application.rb](mdc:config/application.rb) configuration
+3. Review [config/database.yml](mdc:config/database.yml) for database setup
+
+## Implementation Guidelines
+
+### When Reviewing AI-Generated Code:
+1. **Always cross-reference** with spec.md before implementing
+2. **Check prompt history** in prompt_logs/ for context
+3. **Verify technology constraints** against project setup
+4. **Test assumptions** against existing codebase patterns
+
+### When Detecting Potential Hallucinations:
+1. **Flag inconsistencies** with project specifications
+2. **Request clarification** when features seem out of scope
+3. **Suggest alternatives** that align with established patterns
+4. **Document deviations** if they're intentional improvements
+
+### Common Hallucination Scenarios:
+- **Adding external integrations** (only GitHub API is allowed)
+- **Implementing real-time features** (not specified in requirements)
+- **Adding moderation features** (explicitly excluded)
+- **Using different authentication** (GitHub OAuth only)
+- **Adding search functionality** (not in requirements)
+- **Implementing message editing/deletion** (not specified)
+
+## Validation Checklist
+
+Before accepting AI-generated code, verify:
+- [ ] Matches database schema in spec.md
+- [ ] Uses correct technology stack
+- [ ] Follows API specifications
+- [ ] Aligns with feature requirements
+- [ ] Consistent with existing codebase patterns
+- [ ] No external integrations (except GitHub)
+- [ ] Authentication uses GitHub OAuth only
+- [ ] No real-time features unless specified
+- [ ] No moderation features (explicitly excluded)
+
+## Examples of Detected Hallucinations
+
+### ❌ Hallucination Example:
+```ruby
+# Adding external email service integration
+class EmailService
+  def send_notification(user, message)
+    # This violates "no external integrations except GitHub"
+  end
+end
+```
+
+### ✅ Correct Implementation:
+```ruby
+# Internal notification only (as specified)
+class NotificationService
+  def mark_as_unread(user, chat_id)
+    # Internal app notification only
+  end
+end
+```
+
+### ❌ Hallucination Example:
+```ruby
+# Adding search functionality (not in requirements)
+class SearchController < ApplicationController
+  def search_users
+    # Search was not specified in requirements
+  end
+end
+```
+
+### ✅ Correct Implementation:
+```ruby
+# List all users (as specified)
+class UsersController < ApplicationController
+  def index
+    @users = User.all # Simple listing as per spec
+  end
+end
+```
+
+This rule ensures that all AI-generated code and text remains faithful to the project specifications and doesn't introduce features or technologies that weren't part of the original requirements.
