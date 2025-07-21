@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
-    
+
     add_index :users, :github_id, unique: true
     add_index :users, :username
     add_index :users, :email

@@ -13,3 +13,14 @@ module ActiveSupport
     # Add more helper methods to be used by all tests here...
   end
 end
+
+# Добавляем метод для имитации входа пользователя в тестах
+module SignInHelper
+  def sign_in_as(user)
+    post session_path, params: { user_id: user.id }
+  end
+end
+
+class ActionDispatch::IntegrationTest
+  include SignInHelper
+end

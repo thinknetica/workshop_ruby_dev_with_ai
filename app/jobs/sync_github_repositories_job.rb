@@ -10,7 +10,7 @@ class SyncGithubRepositoriesJob < ApplicationJob
     # Здесь будем использовать Octokit для получения репозиториев пользователя
     # и сохранять их в базу данных
     Rails.logger.info "Запущена синхронизация репозиториев для пользователя #{user.username}"
-    
+
     # Пример будущей реализации:
     # client = Octokit::Client.new(access_token: access_token)
     # repositories = client.repositories(nil, { visibility: 'private' })

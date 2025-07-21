@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   # Authentication routes
-  get 'login', to: 'sessions#new'
-  post '/auth/github', to: 'sessions#new'
-  get '/auth/:provider/callback', to: 'sessions#create'
-  get '/auth/failure', to: 'sessions#failure'
-  delete 'logout', to: 'sessions#destroy'
+  get "login", to: "sessions#new"
+  post "/auth/github", to: "sessions#new"
+  get "/auth/:provider/callback", to: "sessions#create"
+  get "/auth/failure", to: "sessions#failure"
+  delete "logout", to: "sessions#destroy"
   
+  # Для тестов: имитация сессии
+  post "session", to: "sessions#create_test_session", as: :session
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
