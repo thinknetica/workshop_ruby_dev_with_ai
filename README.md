@@ -11,6 +11,50 @@
 - Tailwind CSS
 - OmniAuth GitHub OAuth
 
+## Настройка аутентификации через GitHub OAuth
+
+Для того чтобы аутентификация через GitHub работала, необходимо:
+
+1. Зарегистрировать приложение на GitHub:
+   - Перейдите в [GitHub Developer Settings](https://github.com/settings/developers)
+   - Выберите "OAuth Apps" и нажмите "New OAuth App"
+   - Заполните необходимые поля:
+     - **Application name**: GitHub Chat
+     - **Homepage URL**: http://localhost:3000
+     - **Application description**: Чат для владельцев общих приватных репозиториев
+     - **Authorization callback URL**: http://localhost:3000/auth/github/callback
+   - Нажмите "Register application"
+
+2. После регистрации вы получите Client ID и Client Secret. Эти данные нужно указать в переменных окружения:
+
+   ```bash
+   export GITHUB_KEY=ваш_client_id
+   export GITHUB_SECRET=ваш_client_secret
+   ```
+
+   Или создайте файл `.env` в корне проекта:
+   
+   ```
+   GITHUB_KEY=ваш_client_id
+   GITHUB_SECRET=ваш_client_secret
+   ```
+
+3. Запустите сервер:
+
+   ```bash
+   rails server
+   ```
+
+4. Откройте браузер и перейдите по адресу http://localhost:3000
+5. Нажмите на кнопку "Войти через GitHub" и следуйте инструкциям для авторизации приложения
+
+## Требования к окружению
+
+- Ruby 3.2+
+- Rails 8.0+
+- PostgreSQL 12+
+- Redis (для Action Cable и Sidekiq)
+
 ## Установка и запуск
 1. Установите Ruby 3.x и PostgreSQL.
 2. Клонируйте репозиторий:
@@ -22,22 +66,15 @@
    ```sh
    bundle install
    ```
-4. Настройте переменные окружения для GitHub OAuth (см. ниже).
-5. Создайте и инициализируйте базу данных:
+4. Создайте и настройте базу данных:
    ```sh
-   bin/rails db:setup
+   rails db:create
+   rails db:migrate
    ```
-6. Запустите сервер:
+5. Запустите сервер:
    ```sh
    bin/rails server
    ```
-
-## Настройка GitHub OAuth
-- Зарегистрируйте приложение на GitHub: https://github.com/settings/developers
-- Укажите callback URL: `http://localhost:3000/auth/github/callback`
-- Добавьте переменные окружения:
-  - `GITHUB_CLIENT_ID`
-  - `GITHUB_CLIENT_SECRET`
 
 ## Тестирование
 - Для запуска тестов используйте:
@@ -48,7 +85,7 @@
   ```
 
 ## Основные функции
-- Вход через GitHub OAuth (только с правами на приватные репозитории)
+- Аутентификация через GitHub OAuth
 - Автоматическое создание чатов по общим приватным репозиториям
 - Личные и групповые чаты (до 50 участников)
 - История сообщений, индикаторы непрочитанных, онлайн-статус

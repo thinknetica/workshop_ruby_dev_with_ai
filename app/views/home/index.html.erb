@@ -1,0 +1,25 @@
+<div class="flex flex-col items-center justify-center min-h-screen bg-bg-primary p-4">
+  <div class="w-full max-w-md bg-bg-secondary rounded-lg shadow-sm p-8">
+    <h1 class="text-2xl font-bold text-text-primary mb-4 text-center">GitHub Chat</h1>
+    
+    <% if current_user %>
+      <div class="mb-6 text-center">
+        <div class="flex flex-col items-center mb-4">
+          <% if current_user.avatar_url %>
+            <img src="<%= current_user.avatar_url %>" alt="<%= current_user.username %>" class="w-16 h-16 rounded-full mb-2">
+          <% end %>
+          <h2 class="text-lg font-medium text-text-primary">@<%= current_user.username %></h2>
+          <p class="text-text-secondary"><%= current_user.email %></p>
+        </div>
+        
+        <p class="mb-4 text-text-secondary">Вы успешно авторизованы через GitHub!</p>
+        
+        <%= button_to logout_path, method: :delete, class: "w-full bg-danger hover:bg-danger/90 text-white py-2 px-4 rounded-md transition-colors" do %>
+          Выйти из системы
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-text-secondary mb-4 text-center">Вы не авторизованы. <%= link_to "Войдите через GitHub", login_path, class: "text-accent hover:underline" %>.</p>
+    <% end %>
+  </div>
+</div>
