@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback", to: "sessions#create"
   get "/auth/failure", to: "sessions#failure"
   delete "logout", to: "sessions#destroy"
-  
+
   # Для тестов: имитация сессии
   post "session", to: "sessions#create_test_session", as: :session
 
