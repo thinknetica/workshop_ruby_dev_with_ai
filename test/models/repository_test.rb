@@ -26,7 +26,6 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_includes repo.errors[:url], "can't be blank"
   end
 
-  # Associations (to be implemented later)
   test "has many user_repositories" do
     repo = Repository.new
     assert_respond_to repo, :user_repositories

@@ -25,7 +25,6 @@ class MessageTest < ActiveSupport::TestCase
     assert_includes message.errors[:content], "is too long (maximum is 400 characters)"
   end
 
-  # Associations (to be implemented later)
   test "belongs to chat" do
     assert_respond_to Message.new, :chat
   end

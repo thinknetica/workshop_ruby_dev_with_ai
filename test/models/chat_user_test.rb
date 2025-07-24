@@ -22,7 +22,6 @@ class ChatUserTest < ActiveSupport::TestCase
     assert_includes cu.errors[:chat_id], "has already been taken"
   end
 
-  # Associations (to be implemented later)
   test "belongs to chat" do
     assert_respond_to ChatUser.new, :chat
   end

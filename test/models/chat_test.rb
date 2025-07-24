@@ -22,7 +22,6 @@ class ChatTest < ActiveSupport::TestCase
     assert_not_includes chat.errors[:chat_type], "is not included in the list"
   end
 
-  # Associations (to be implemented later)
   test "belongs to repository (optional)" do
     assert_respond_to Chat.new, :repository
   end

@@ -22,7 +22,6 @@ class UserRepositoryTest < ActiveSupport::TestCase
     assert_includes ur.errors[:user_id], "has already been taken"
   end
 
-  # Associations (to be implemented later)
   test "belongs to user" do
     assert_respond_to UserRepository.new, :user
   end
