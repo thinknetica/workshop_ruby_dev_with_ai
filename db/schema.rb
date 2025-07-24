@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_24_202204) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_24_202621) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,6 +20,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_24_202204) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["repository_id"], name: "index_chats_on_repository_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "chat_id", null: false
+    t.bigint "user_id", null: false
+    t.string "content", limit: 400
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id", "created_at"], name: "index_messages_on_chat_id_and_created_at"
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "repositories", force: :cascade do |t|
@@ -54,6 +65,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_24_202204) do
   end
 
   add_foreign_key "chats", "repositories"
+  add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "users"
   add_foreign_key "user_repositories", "repositories"
   add_foreign_key "user_repositories", "users"
 end
