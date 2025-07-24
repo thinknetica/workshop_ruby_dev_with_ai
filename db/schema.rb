@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_24_201343) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_24_201842) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -21,6 +21,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_24_201343) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["url"], name: "index_repositories_on_url", unique: true
+  end
+
+  create_table "user_repositories", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "repository_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repository_id"], name: "index_user_repositories_on_repository_id"
+    t.index ["user_id", "repository_id"], name: "index_user_repositories_on_user_id_and_repository_id", unique: true
+    t.index ["user_id"], name: "index_user_repositories_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -34,4 +44,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_24_201343) do
     t.index ["github_id"], name: "index_users_on_github_id", unique: true
     t.index ["username"], name: "index_users_on_username"
   end
+
+  add_foreign_key "user_repositories", "repositories"
+  add_foreign_key "user_repositories", "users"
 end
