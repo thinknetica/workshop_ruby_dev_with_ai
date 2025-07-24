@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_24_202621) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_24_202955) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "chat_users", force: :cascade do |t|
+    t.bigint "chat_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "last_read_message_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id", "user_id"], name: "index_chat_users_on_chat_id_and_user_id", unique: true
+    t.index ["chat_id"], name: "index_chat_users_on_chat_id"
+    t.index ["last_read_message_id"], name: "index_chat_users_on_last_read_message_id"
+    t.index ["user_id"], name: "index_chat_users_on_user_id"
+  end
 
   create_table "chats", force: :cascade do |t|
     t.string "chat_type"
@@ -64,6 +76,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_24_202621) do
     t.index ["username"], name: "index_users_on_username"
   end
 
+  add_foreign_key "chat_users", "chats"
+  add_foreign_key "chat_users", "messages", column: "last_read_message_id"
+  add_foreign_key "chat_users", "users"
   add_foreign_key "chats", "repositories"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
