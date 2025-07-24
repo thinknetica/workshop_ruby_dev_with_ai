@@ -1,5 +1,5 @@
 # Current status and requirements for models
-_Exported on 24.07.2025 at 23:31:57 GMT+3 from Cursor (1.2.4)_
+_Exported on 24.07.2025 at 23:32:39 GMT+3 from Cursor (1.2.4)_
 
 ---
 
@@ -1912,4 +1912,27 @@ You have now completed the TDD cycle and implementation for all planned models:
 - ChatUser (with last_read_message_id)
 
 If you’d like, we can update the memory bank to reflect this progress, proceed to integration tests, or move on to the next feature. What would you like to do next?
+
+---
+
+**User**
+
+update memory bank
+
+---
+
+**Cursor**
+
+```markdown
+- [x] Модель Repository
+- [x] Модель UserRepository
+- [x] Модель Chat
+- [x] Модель Message
+- [x] Модель ChatUser (добавить поле last_read_message_id для отслеживания прочитанных сообщений)
+
+```
+
+All model implementation tasks (Repository, UserRepository, Chat, Message, ChatUser) are now complete and up to date in your memory bank progress checklist.
+
+If you want to proceed to integration tests, next features, or need a summary of your current state, just let me know!
 
