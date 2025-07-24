@@ -138,3 +138,24 @@
   - В таблицах chat_users и chats реализованы только необходимые для MVP поля.
 - Все изменения и упрощения были сделаны для минимизации схемы и ускорения MVP, с возможностью расширения в будущем.
 - Следующий этап — реализация бизнес-логики и сервисных объектов, после чего появится необходимость в интеграционных тестах.
+
+## ARCHIVE: Изменения в модели (before/after)
+
+### До изменений
+- Не было моделей Repository, UserRepository, Chat, Message, ChatUser (кроме User).
+- Не было таблиц и миграций для этих сущностей.
+- Не было логики отслеживания непрочитанных сообщений.
+- Не было тестов и ассоциаций для чатов и сообщений.
+- В схеме БД были избыточные поля и таблицы (например, unread_messages, поле private в repositories).
+
+### После изменений
+- **Repository**: добавлены модель, миграция, тесты; поля: github_repo_id, name, url, timestamps; ассоциации: has_many :user_repositories, has_many :users, through: :user_repositories; убрано поле private, добавлено url.
+- **UserRepository**: добавлены модель, миграция, тесты; поля: user_id, repository_id, timestamps; ассоциации: belongs_to :user, belongs_to :repository; уникальный индекс.
+- **Chat**: добавлены модель, миграция, тесты; поля: chat_type (private/group), repository_id (nullable), timestamps; ассоциация: belongs_to :repository, optional: true.
+- **Message**: добавлены модель, миграция, тесты; поля: chat_id, user_id, content (max 400), timestamps; ассоциации: belongs_to :chat, belongs_to :user; индекс для истории чата.
+- **ChatUser**: добавлены модель, миграция, тесты; поля: chat_id, user_id, last_read_message_id (nullable), timestamps; ассоциации: belongs_to :chat, belongs_to :user, belongs_to :last_read_message, class_name: 'Message', optional: true; уникальный индекс; отслеживание прочтения через last_read_message_id.
+- Все модели покрыты юнит-тестами (валидации и ассоциации), TDD соблюден.
+- Схема упрощена: убраны избыточные поля и таблицы, оставлены только необходимые для MVP.
+- Документация и диаграммы обновлены.
+
+**Модельный слой завершён и заархивирован.**
