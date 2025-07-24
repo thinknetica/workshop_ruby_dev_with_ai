@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_24_201842) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_24_202204) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "chats", force: :cascade do |t|
+    t.string "chat_type"
+    t.bigint "repository_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repository_id"], name: "index_chats_on_repository_id"
+  end
 
   create_table "repositories", force: :cascade do |t|
     t.bigint "github_repo_id"
@@ -45,6 +53,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_24_201842) do
     t.index ["username"], name: "index_users_on_username"
   end
 
+  add_foreign_key "chats", "repositories"
   add_foreign_key "user_repositories", "repositories"
   add_foreign_key "user_repositories", "users"
 end
