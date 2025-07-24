@@ -20,7 +20,7 @@ erDiagram
         bigint id PK
         bigint github_repo_id UK "Уникальный"
         string name "Не null"
-        boolean private "Не null"
+        string url "Не null"
         datetime created_at
         datetime updated_at
     }
@@ -41,16 +41,6 @@ erDiagram
         datetime updated_at
     }
 
-    CHAT_USERS {
-        bigint id PK
-        bigint chat_id FK
-        bigint user_id FK
-        datetime joined_at
-        datetime left_at "Nullable"
-        datetime created_at
-        datetime updated_at
-    }
-
     MESSAGES {
         bigint id PK
         bigint chat_id FK
@@ -59,11 +49,12 @@ erDiagram
         datetime created_at
     }
 
-    UNREAD_MESSAGES {
+    CHAT_USERS {
         bigint id PK
-        bigint user_id FK
         bigint chat_id FK
+        bigint user_id FK
         bigint last_read_message_id FK "Nullable"
+        datetime created_at
         datetime updated_at
     }
 
@@ -74,7 +65,5 @@ erDiagram
     CHATS ||--o{ CHAT_USERS : "включает"
     USERS ||--o{ MESSAGES : "отправляет"
     CHATS ||--o{ MESSAGES : "содержит"
-    USERS ||--o{ UNREAD_MESSAGES : "имеет"
-    CHATS ||--o{ UNREAD_MESSAGES : "имеет"
-    MESSAGES ||--o{ UNREAD_MESSAGES : "отмечает"
+    CHAT_USERS ||--o{ MESSAGES : "читает"
 ```
