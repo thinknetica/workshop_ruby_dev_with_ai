@@ -27,7 +27,13 @@ class RepositoryTest < ActiveSupport::TestCase
   end
 
   # Associations (to be implemented later)
-  # test "has many user_repositories" do
-  #   assert_respond_to Repository.new, :user_repositories
-  # end
+  test "has many user_repositories" do
+    repo = Repository.new
+    assert_respond_to repo, :user_repositories
+  end
+
+  test "has many users through user_repositories" do
+    repo = Repository.new
+    assert_respond_to repo, :users
+  end
 end

@@ -23,10 +23,10 @@ class UserRepositoryTest < ActiveSupport::TestCase
   end
 
   # Associations (to be implemented later)
-  # test "belongs to user" do
-  #   assert_respond_to UserRepository.new, :user
-  # end
-  # test "belongs to repository" do
-  #   assert_respond_to UserRepository.new, :repository
-  # end
+  test "belongs to user" do
+    assert_respond_to UserRepository.new, :user
+  end
+  test "belongs to repository" do
+    assert_respond_to UserRepository.new, :repository
+  end
 end

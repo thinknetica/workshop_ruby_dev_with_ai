@@ -23,7 +23,7 @@ class ChatTest < ActiveSupport::TestCase
   end
 
   # Associations (to be implemented later)
-  # test "belongs to repository (optional)" do
-  #   assert_respond_to Chat.new, :repository
-  # end
+  test "belongs to repository (optional)" do
+    assert_respond_to Chat.new, :repository
+  end
 end

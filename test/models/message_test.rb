@@ -26,10 +26,10 @@ class MessageTest < ActiveSupport::TestCase
   end
 
   # Associations (to be implemented later)
-  # test "belongs to chat" do
-  #   assert_respond_to Message.new, :chat
-  # end
-  # test "belongs to user" do
-  #   assert_respond_to Message.new, :user
-  # end
+  test "belongs to chat" do
+    assert_respond_to Message.new, :chat
+  end
+  test "belongs to user" do
+    assert_respond_to Message.new, :user
+  end
 end

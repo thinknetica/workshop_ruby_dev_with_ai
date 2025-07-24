@@ -23,13 +23,13 @@ class ChatUserTest < ActiveSupport::TestCase
   end
 
   # Associations (to be implemented later)
-  # test "belongs to chat" do
-  #   assert_respond_to ChatUser.new, :chat
-  # end
-  # test "belongs to user" do
-  #   assert_respond_to ChatUser.new, :user
-  # end
-  # test "belongs to last_read_message (optional)" do
-  #   assert_respond_to ChatUser.new, :last_read_message
-  # end
+  test "belongs to chat" do
+    assert_respond_to ChatUser.new, :chat
+  end
+  test "belongs to user" do
+    assert_respond_to ChatUser.new, :user
+  end
+  test "belongs to last_read_message (optional)" do
+    assert_respond_to ChatUser.new, :last_read_message
+  end
 end
