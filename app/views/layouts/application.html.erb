@@ -18,8 +18,25 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :application %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%# Tailwind CSS CDN for immediate styling %>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <%# Local importmap for JavaScript %>
     <%= javascript_importmap_tags %>
+    <%# Fallback JavaScript for immediate functionality %>
+    <script>
+      console.log('Application JavaScript loaded via CDN fallback');
+      // Basic Tailwind config
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'github': '#24292e',
+            }
+          }
+        }
+      }
+    </script>
   </head>
 
   <body>
