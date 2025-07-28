@@ -9,7 +9,7 @@ class CreateRepositories < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
-    
+
     add_index :repositories, :github_repo_id, unique: true, name: 'idx_repos_github_id'
     add_index :repositories, :private, name: 'idx_repos_private'
     add_index :repositories, :full_name, name: 'idx_repos_full_name'

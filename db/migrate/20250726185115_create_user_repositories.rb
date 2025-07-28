@@ -8,8 +8,8 @@ class CreateUserRepositories < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
-    
-    add_index :user_repositories, [:user_id, :repository_id], 
+
+    add_index :user_repositories, [ :user_id, :repository_id ],
               unique: true, name: 'idx_user_repos_unique'
     add_index :user_repositories, :repository_id, name: 'idx_user_repos_repo'
     add_index :user_repositories, :role, name: 'idx_user_repos_role'
