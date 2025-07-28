@@ -1,1 +1,13 @@
-# Empty fixtures file
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  github_id: "testuser1"
+  username: testuser1
+  email: testuser1@example.com
+  avatar_url: https://example.com/avatar1.png
+
+two:
+  github_id: "testuser2"
+  username: testuser2
+  email: testuser2@example.com
+  avatar_url: https://example.com/avatar2.png

@@ -1,11 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  github_repo_id: 
-  name: MyString
+  github_repo_id: 12345
+  name: test-repo-one
+  full_name: testuser/test-repo-one
+  description: Test repository one
   private: false
 
 two:
-  github_repo_id: 
-  name: MyString
-  private: false
+  github_repo_id: 67890
+  name: test-repo-two
+  full_name: testuser/test-repo-two
+  description: Test repository two
+  private: true
