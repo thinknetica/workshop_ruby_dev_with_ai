@@ -1,65 +1,8 @@
 /*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
+ * This is a minimal manifest file for additional application styles.
+ * 
+ * Main styles are now handled by Tailwind CSS in app/assets/tailwind/application.css
+ * This file should only contain styles that cannot be expressed with Tailwind classes.
  */
 
-:root {
-  /* GitHub-inspired light theme */
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f6f8fa;
-  --color-bg-tertiary: #f0f2f5;
-  --color-text-primary: #24292e;
-  --color-text-secondary: #586069;
-  --color-border: #e1e4e8;
-  --color-accent: #2ea44f;
-  --color-success: #2ea44f;
-  --color-danger: #cb2431;
-  --color-github: #24292e;
-}
-
-/* Dark theme - will be activated based on user preference */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg-primary: #0d1117;
-    --color-bg-secondary: #161b22;
-    --color-bg-tertiary: #21262d;
-    --color-text-primary: #c9d1d9;
-    --color-text-secondary: #8b949e;
-    --color-border: #30363d;
-    --color-accent: #238636;
-    --color-success: #238636;
-    --color-danger: #f85149;
-    --color-github: #161b22;
-  }
-}
-
-/* Utility classes to use the CSS variables */
-.bg-bg-primary { background-color: var(--color-bg-primary); }
-.bg-bg-secondary { background-color: var(--color-bg-secondary); }
-.bg-bg-tertiary { background-color: var(--color-bg-tertiary); }
-.text-text-primary { color: var(--color-text-primary); }
-.text-text-secondary { color: var(--color-text-secondary); }
-.border-border { border-color: var(--color-border); }
-.bg-accent { background-color: var(--color-accent); }
-.text-accent { color: var(--color-accent); }
-.bg-success { background-color: var(--color-success); }
-.text-success { color: var(--color-success); }
-.bg-danger { background-color: var(--color-danger); }
-.text-danger { color: var(--color-danger); }
-.bg-github { background-color: var(--color-github); }
-
-/* Common styling */
-body {
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-}
-
-.transform { transform-origin: center; }
-.rotate-180 { transform: rotate(180deg); }
+/* Additional custom styles that don't fit Tailwind patterns go here */
